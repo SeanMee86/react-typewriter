@@ -4,15 +4,16 @@ const TypeWriter = function(array, timeDelay) {
     this.newLine = '';
     this.counter = 0;
     this.arrayCounter = 1;
-    this.linesArray = array.map(line => line.split(''));
+    this.linesArray = array.map(el => el.props !== undefined ? el.props.children : el);
+    this.charsArray = this.linesArray.map(line => line.split(''));
 
     this.textObj = {};
-    this.linesArray.forEach((line, ind) => this.textObj[`line${ind+1}`] = '');
+    this.charsArray.forEach((line, ind) => this.textObj[`line${ind+1}`] = '');
     const [text, setText] = useState(this.textObj);
 
     this.createLines = () => {
         this.typingInterval = setInterval(() => {
-            this.newLine = this.newLine + this.linesArray[this.arrayCounter - 1][this.counter];
+            this.newLine = this.newLine + this.charsArray[this.arrayCounter - 1][this.counter];
 
             setText((prevState) => {
                 return {
@@ -23,9 +24,9 @@ const TypeWriter = function(array, timeDelay) {
 
             this.counter++;
 
-            if (this.counter >= this.linesArray[this.arrayCounter - 1].length) {
+            if (this.counter >= this.charsArray[this.arrayCounter - 1].length) {
                 clearInterval(this.typingInterval);
-                if(this.arrayCounter < this.linesArray.length) {
+                if(this.arrayCounter < this.charsArray.length) {
                     this.newLine = '';
                     this.counter = 0;
                     this.arrayCounter++;
@@ -40,10 +41,10 @@ const TypeWriter = function(array, timeDelay) {
     };
 
     this.typeLines = () => {
-        return this.linesArray
+        return this.charsArray
             .map((line,ind) => (
                 <p key={ind}>{this.printText()[`line${ind+1}`]}</p>
-            ));
+    ));
     };
 
     this.intervalRef = () => {

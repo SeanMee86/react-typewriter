@@ -42,9 +42,12 @@ const TypeWriter = function(array, timeDelay) {
 
     this.typeLines = () => {
         return this.charsArray
-            .map((line,ind) => (
-                <p key={ind}>{this.printText()[`line${ind+1}`]}</p>
-    ));
+            .map((line,ind) => {
+                const CustomTag = `${array[ind].type}`;
+                return (
+                    <CustomTag key={ind}>{this.printText()[`line${ind+1}`]}</CustomTag>
+                )
+            });
     };
 
     this.intervalRef = () => {

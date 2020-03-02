@@ -12,7 +12,7 @@ const TypeOut = (props) => {
     }, []);
 
     return (
-        <div>
+        <div className={props.className}>
         {typeWriter.typeLines()}
         </div>
 )

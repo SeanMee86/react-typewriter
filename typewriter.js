@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 
 const TypeWriter = function(array, timeDelay) {
+    if(!array.length) array = [array];
     this.newLine = '';
     this.counter = 0;
     this.arrayCounter = 1;

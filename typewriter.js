@@ -15,7 +15,7 @@ class TypeWriter{
         [this.text, this.setText] = useState(this.textObj);
     }
 
-    createLines = () => {
+    createLines(){
         this.typingInterval = setInterval(() => {
             this.newLine = this.newLine + this.charsArray[this.arrayCounter - 1][this.counter];
             this.setText((prevState) => {
@@ -37,17 +37,23 @@ class TypeWriter{
         }, this.timeDelay);
     };
 
-    printText = () => this.text;
+    printText(){
+        return this.text;
+    }
 
-    typeLines = () => this.charsArray
-        .map((line,ind) => {
-            const CustomTag = `${this.array[ind].type ? this.array[ind].type : 'p'}`;
-            return (
-                <CustomTag key={ind}>{this.printText()[`line${ind+1}`]}</CustomTag>
-            )
-        });
+    typeLines(){
+        return this.charsArray
+            .map((line,ind) => {
+                const CustomTag = `${this.array[ind].type ? this.array[ind].type : 'p'}`;
+                return (
+                    <CustomTag key={ind}>{this.printText()[`line${ind+1}`]}</CustomTag>
+                )
+            });
+    }
 
-    intervalRef = () => this.typingInterval
+    intervalRef(){
+        return this.typingInterval
+    }
 }
 
 export default TypeWriter;
